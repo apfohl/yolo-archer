@@ -1,0 +1,7 @@
+<h1>Sources</h1>
+<% @sources.each do |source| %>
+  <p><%= source.title %> |
+    <%= link_to 'destroy', source, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Edit', edit_source_path(source) %></p>
+<% end %>
+<%= link_to 'New Source', new_source_path %>
