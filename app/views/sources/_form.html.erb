@@ -1,0 +1,11 @@
+<%= form_for @source do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %><br />
+  <%= f.label :url %>
+  <%= f.text_field :url %><br />
+  <%= f.label :author %>
+  <%= f.text_field :author %><br />
+  <%= f.label :publisher %>
+  <%= f.text_field :publisher %><br />
+  <%= f.submit %>
+<% end %>
