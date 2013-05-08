@@ -1,7 +1,26 @@
-<h1>Sources</h1>
-<% @sources.each do |source| %>
-  <p><%= source.title %> |
-    <%= link_to 'destroy', source, method: :delete, data: { confirm: 'Are you sure?' } %> |
-    <%= link_to 'Edit', edit_source_path(source) %></p>
-<% end %>
-<%= link_to 'New Source', new_source_path %>
+<div class="row">
+  <div class="span8 offset2">
+    <h1>Sources</h1>
+    <% @sources.each do |source| %>
+      <h2><%= link_to source.title, source %></h2>
+      <p class="lead">
+        <strong>URL:</strong> <%= link_to source.url, source.url %><br />
+        <strong>Author:</strong> <%= source.author %><br />
+        <strong>Publisher:</strong> <%= source.publisher %>
+      </p>
+      <% if !source.annotations.empty? %>
+        <div class="row">
+          <div class="span1">
+            <p class="lead"><%= source.annotations.last.rating %></p>
+          </div>
+          <div class="span7">
+            <div class="well">
+              <%= source.annotations.last.content %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <%= link_to 'New Source', new_source_path %>
+  </div>
+</div>

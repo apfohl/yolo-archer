@@ -1,2 +1,24 @@
-<h1><%= @source.title %></h1>
-<p>Some Text</p>
+<div class="row">
+  <div class="span8 offset2">
+    <h1><%= @source.title %></h1>
+    <p class="lead">
+      <strong>URL:</strong> <%= link_to @source.url, @source.url %><br />
+      <strong>Author:</strong> <%= @source.author %><br />
+      <strong>Publisher:</strong> <%= @source.publisher %>
+    </p>
+    <h3>Annotations</h3>
+    <div class="row">
+      <% @source.annotations.each do |annotation| %>
+        <div class="span1">
+          <div class="well">vote</div>
+        </div>
+        <div class="span7">
+          <div class="well">
+            <%= annotation.content %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to 'New Annotation', new_source_annotation_path(source_id: @source.id) %>
+  </div>
+</div>

@@ -15,7 +15,7 @@ class SourcesController < ApplicationController
     @source = Source.new(params[:source])
     if @source.save
       flash[:notice] = "Successfully created source."
-      redirect_to @source
+      redirect_to sources_url
     else
       render action: 'new'
     end

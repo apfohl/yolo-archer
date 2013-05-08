@@ -9,9 +9,9 @@ class AnnotationsController < ApplicationController
     @annotation = @source.annotations.new(params[:annotation])
     if @annotation.save
       flash[:notice] = "Successfully created annotation."
-      redirect_to sources_path
+      redirect_to @source
     else
-      flash[:notice] = "Failed."
+      flash[:alert] = "Failed."
       render action: 'new'
     end
   end
