@@ -1,6 +1,7 @@
 YoloArcher::Application.routes.draw do
-  resources :sources
-  resources :annotations, only: [:new, :create, :edit, :update, :destroy]
+  resources :sources do
+    resources :annotations, except: [:show, :index]
+  end
 
   root to: 'sources#index'
 end

@@ -1,14 +1,17 @@
 class AnnotationsController < ApplicationController
   def new
+    @source = Source.find(params[:source_id])
     @annotation = Annotation.new
   end
 
   def create
-    @annotation = Annotation.new(params[:annotation])
+    @source = Source.find(params[:source_id])
+    @annotation = @source.annotations.new(params[:annotation])
     if @annotation.save
       flash[:notice] = "Successfully created annotation."
-      redirect_to @annotation
+      redirect_to sources_path
     else
+      flash[:notice] = "Failed."
       render action: 'new'
     end
   end
