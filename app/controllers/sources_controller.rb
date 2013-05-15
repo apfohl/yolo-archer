@@ -41,4 +41,16 @@ class SourcesController < ApplicationController
     flash[:notice] = "Successfully destroyed source."
     redirect_to sources_url
   end
+
+  def up
+    source = Source.find(params[:id])
+    source.increment! :rating
+    render json: {rating: source.rating}
+  end
+
+  def down
+    source = Source.find(params[:id])
+    source.decrement! :rating
+    render json: {rating: source.rating}
+  end
 end
