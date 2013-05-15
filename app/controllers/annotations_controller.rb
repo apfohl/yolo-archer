@@ -36,4 +36,16 @@ class AnnotationsController < ApplicationController
     flash[:notice] = "Successfully destroyed annotation."
     redirect_to sources_url
   end
+
+  def up
+    annotation = Annotation.find(params[:id])
+    annotation.increment! :rating
+    render json: {rating: annotation.rating}
+  end
+
+  def down
+    annotation = Annotation.find(params[:id])
+    annotation.decrement! :rating
+    render json: {rating: annotation.rating}
+  end
 end
