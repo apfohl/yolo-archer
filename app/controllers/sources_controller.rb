@@ -1,6 +1,6 @@
 class SourcesController < ApplicationController
   def index
-    @sources = Source.all
+    @sources = Source.order('rating DESC')
   end
 
   def show

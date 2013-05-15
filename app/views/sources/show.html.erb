@@ -22,7 +22,7 @@
     </p>
     <h3>Annotations</h3>
     <div class="row">
-      <% @source.annotations.each do |annotation| %>
+      <% @source.annotations.order('rating DESC').each do |annotation| %>
         <div class="span1">
           <div class="btn-group btn-group-vertical">
             <button class="btn" onclick="vote_annotation('<%= source_annotation_up_path(@source, annotation) %>', this);">▲</button>
