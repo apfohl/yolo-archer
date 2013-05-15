@@ -35,12 +35,9 @@
       </div>
       <% if !source.annotations.empty? %>
         <div class="row">
-          <div class="span1">
-            <span class="label"> <%= source.annotations.last.rating %> </span>
-          </div>
-          <div class="span7">
+          <div class="offset1 span7">
             <div class="well">
-              <%= source.annotations.last.content %>
+              <%= source.annotations.order('rating DESC').first.content %>
             </div>
           </div>
         </div>
