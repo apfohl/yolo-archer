@@ -1,3 +1,17 @@
+<script type="text/javascript">
+	function vote_source(link, caller) {
+		console.log(link);
+		$.ajax({
+			url: link,
+			type: 'PUT',
+			success: function(res) {
+				console.log(res);
+				console.log($(caller).parent().parent().children(".label").text());
+				$(caller).parent().parent().children(".label").text(res.rating);
+			},
+		});
+	};
+</script>
 <div class="row">
   <div class="span8 offset2">
     <h1>Sources</h1>
@@ -11,7 +25,11 @@
       <% if !source.annotations.empty? %>
         <div class="row">
           <div class="span1">
-            <p class="lead"><%= source.annotations.last.rating %></p>
+						<div class="btn-group btn-group-vertical">
+							<button class="btn" onclick="vote_source('<%= source_up_path(source) %>', this);">▲</button>
+							<button class="btn" onclick="vote_source('<%= source_down_path(source) %>', this);">▼</button>
+						</div>
+						<span class="label"> <%= source.annotations.last.rating %> </span>
           </div>
           <div class="span7">
             <div class="well">
