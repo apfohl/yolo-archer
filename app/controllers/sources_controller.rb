@@ -1,6 +1,10 @@
 class SourcesController < ApplicationController
   def index
-    @sources = Source.order('rating DESC')
+    if params[:tag]
+      @sources = Source.tagged_with(params[:tag]).order('rating DESC')
+    else
+      @sources = Source.order('rating DESC')
+    end
   end
 
   def show
