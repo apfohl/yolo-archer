@@ -17,14 +17,16 @@ class AnnotationsController < ApplicationController
   end
 
   def edit
+    @source = Source.find(params[:source_id])
     @annotation = Annotation.find(params[:id])
   end
 
   def update
+    @source = Source.find(params[:source_id])
     @annotation = Annotation.find(params[:id])
     if @annotation.update_attributes(params[:annotation])
       flash[:notice] = "Successfully updated annotation."
-      redirect_to @annotation
+      redirect_to @source
     else
       render action: 'edit'
     end
