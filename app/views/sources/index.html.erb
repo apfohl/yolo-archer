@@ -28,8 +28,8 @@
       <div class="row">
         <div class="span1">
           <div class="btn-group btn-group-vertical">
-            <button class="btn" onclick="vote_source('<%= source_up_path(source) %>', this);">▲</button>
-            <button class="btn" onclick="vote_source('<%= source_down_path(source) %>', this);">▼</button>
+            <button class="btn btn-mini" onclick="vote_source('<%= source_up_path(source) %>', this);"><i class="icon-plus"></i></button>
+            <button class="btn btn-mini" onclick="vote_source('<%= source_down_path(source) %>', this);"><i class="icon-minus"></i></button>
           </div>
           <span class="label"> <%= source.rating %> </span>
         </div>
