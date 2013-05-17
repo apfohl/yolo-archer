@@ -13,6 +13,15 @@
   };
 </script>
 <div class="row">
+  <div class="offset2 span8">
+    <p id="tag_cloud">
+      <% tag_cloud Source.tag_counts, %w{s m l} do |tag, css_class| %>
+        <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+      <% end %>
+    </p>
+  </div>
+</div>
+<div class="row">
   <div class="span8 offset2">
     <h1>Sources</h1>
     <% @sources.each do |source| %>
