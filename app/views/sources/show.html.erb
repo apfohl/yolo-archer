@@ -13,17 +13,21 @@
   };
 </script>
 <div class="row">
-	<%= link_to root_path do %>
-		<i class="icon-home"></i> back to sources
-	<% end %>
+  <%= link_to root_path do %>
+    <i class="icon-home"></i> back to sources
+  <% end %>
 </div>
 <div class="row">
   <div class="span8 offset2">
-    <h1><%= @source.title %>
-			<%= link_to edit_source_path(@source) do %>
-				<i class="icon-pencil"> </i>
-			<% end %>
-		</h1>
+    <h1>
+      <%= @source.title %>
+      <%= link_to edit_source_path(@source) do %>
+        <i class="icon-pencil"></i>
+      <% end %>
+      <%= link_to source_path(@source), method: :delete, data: {confirm: 'Are you sure?' } do %>
+        <i class="icon-trash"></i>
+      <% end %>
+    </h1>
     <p class="lead">
       <strong>URL:</strong> <%= link_to @source.url, @source.url %><br />
       <strong>Author:</strong> <%= @source.author %><br />
@@ -43,9 +47,12 @@
         <div class="span7">
           <div class="well">
             <%= markdown annotation.content %>
-						<%= link_to edit_source_annotation_path(@source, annotation) do %>
-							<i class="icon-pencil"> </i>
-						<% end %>
+            <%= link_to source_annotation_path(@source, annotation), method: :delete, data: {confirm: 'Are you sure?' } do %>
+              <i class="icon-trash pull-right"> </i>
+            <% end %>
+            <%= link_to edit_source_annotation_path(@source, annotation) do %>
+              <i class="icon-pencil pull-right"> </i>
+            <% end %>
           </div>
         </div>
       <% end %>
