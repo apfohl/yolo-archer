@@ -17,6 +17,7 @@ class AnnotationsController < ApplicationController
   end
 
   def edit
+    @source = Source.find(params[:source_id])
     @annotation = Annotation.find(params[:id])
   end
 
