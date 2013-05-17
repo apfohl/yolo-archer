@@ -19,7 +19,11 @@
 </div>
 <div class="row">
   <div class="span8 offset2">
-    <h1><%= @source.title %></h1>
+    <h1><%= @source.title %>
+			<%= link_to edit_source_path(@source) do %>
+				<i class="icon-pencil"> </i>
+			<% end %>
+		</h1>
     <p class="lead">
       <strong>URL:</strong> <%= link_to @source.url, @source.url %><br />
       <strong>Author:</strong> <%= @source.author %><br />
@@ -39,6 +43,9 @@
         <div class="span7">
           <div class="well">
             <%= markdown annotation.content %>
+						<%= link_to edit_source_annotation_path(@source, annotation) do %>
+							<i class="icon-pencil"> </i>
+						<% end %>
           </div>
         </div>
       <% end %>
