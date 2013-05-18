@@ -1,19 +1,5 @@
-<script type="text/javascript">
-  function vote_source(link, caller) {
-    console.log(link);
-    $.ajax({
-      url: link,
-      type: 'PUT',
-      success: function(res) {
-        console.log(res);
-        console.log($(caller).parent().parent().children(".label").text());
-        $(caller).parent().parent().children(".label").text(res.rating);
-      },
-    });
-  };
-</script>
 <div class="row">
-  <div class="offset2 span8">
+  <div class="offset4 span4 pagination-centered">
     <p id="tag_cloud">
       <% tag_cloud Source.tag_counts, %w{s m l} do |tag, css_class| %>
         <%= link_to tag.name, tag_path(tag.name), class: css_class %>
@@ -26,12 +12,10 @@
     <h1>Sources</h1>
     <% @sources.each do |source| %>
       <div class="row">
-        <div class="span1">
-          <div class="btn-group btn-group-vertical">
-            <button class="btn btn-mini" onclick="vote_source('<%= source_up_path(source) %>', this);"><i class="icon-plus"></i></button>
-            <button class="btn btn-mini" onclick="vote_source('<%= source_down_path(source) %>', this);"><i class="icon-minus"></i></button>
-          </div>
-          <span class="label"> <%= source.rating %> </span>
+        <div class="span1 pagination-centered">
+          <button class="btn btn-mini" onclick="vote_source('<%= source_up_path(source) %>', this);"><i class="icon-plus"></i></button><br />
+          <span class="lead<%= source.rating >= 0 ? ' text-success' : ' text-error' %>"><%= source.rating %></span><br />
+          <button class="btn btn-mini" onclick="vote_source('<%= source_down_path(source) %>', this);"><i class="icon-minus"></i></button>
         </div>
         <div class="span7">
           <h2><%= link_to source.title, source %></h2>

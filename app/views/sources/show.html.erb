@@ -1,17 +1,3 @@
-<script type="text/javascript">
-  function vote_annotation(link, caller) {
-    console.log(link);
-    $.ajax({
-      url: link,
-      type: 'PUT',
-      success: function(res) {
-        console.log(res);
-        console.log($(caller).parent().parent().children(".label").text());
-        $(caller).parent().parent().children(".label").text(res.rating);
-      },
-    });
-  };
-</script>
 <div class="row">
   <%= link_to root_path do %>
     <i class="icon-home"></i> back to sources
@@ -19,40 +5,28 @@
 </div>
 <div class="row">
   <div class="span8 offset2">
-    <h1>
-      <%= @source.title %>
-      <%= link_to edit_source_path(@source) do %>
-        <i class="icon-pencil"></i>
-      <% end %>
-      <%= link_to source_path(@source), method: :delete, data: {confirm: 'Are you sure?' } do %>
-        <i class="icon-trash"></i>
-      <% end %>
-    </h1>
+    <h1><%= @source.title %></h1>
     <p class="lead">
       <strong>URL:</strong> <%= link_to @source.url, @source.url %><br />
       <strong>Author:</strong> <%= @source.author %><br />
       <strong>Publisher:</strong> <%= @source.publisher %><br />
-      <strong>Tags:</strong> <%= raw @source.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
+      <strong>Tags:</strong> <%= raw @source.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %><br />
+      <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_source_path(@source) %>
+      <%= link_to '<i class="icon-trash"></i>'.html_safe, source_path(@source), method: :delete, data: {confirm: 'Are you sure?' } %>
     </p>
     <h3>Annotations</h3>
     <div class="row">
       <% @source.annotations.order('rating DESC').each do |annotation| %>
-        <div class="span1">
-          <div class="btn-group btn-group-vertical">
-            <button class="btn" onclick="vote_annotation('<%= source_annotation_up_path(@source, annotation) %>', this);">▲</button>
-            <button class="btn" onclick="vote_annotation('<%= source_annotation_down_path(@source, annotation) %>', this);">▼</button>
-          </div>
-          <span class="label"> <%= annotation.rating %> </span>
+        <div class="span1 pagination-centered">
+          <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_up_path(@source, annotation) %>', this);"><i class="icon-plus"></i></button><br />
+          <span class="lead<%= annotation.rating >= 0 ? ' text-success' : ' text-error' %>"><%= annotation.rating %></span><br />
+          <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_down_path(@source, annotation) %>', this);"><i class="icon-minus"></i></button>
         </div>
         <div class="span7">
           <div class="well">
             <%= markdown annotation.content %>
-            <%= link_to source_annotation_path(@source, annotation), method: :delete, data: {confirm: 'Are you sure?' } do %>
-              <i class="icon-trash pull-right"> </i>
-            <% end %>
-            <%= link_to edit_source_annotation_path(@source, annotation) do %>
-              <i class="icon-pencil pull-right"> </i>
-            <% end %>
+            <%= link_to '<i class="icon-trash pull-right"></i>'.html_safe, source_annotation_path(@source, annotation), method: :delete, data: {confirm: 'Are you sure?' } %>
+            <%= link_to '<i class="icon-pencil pull-right"></i>'.html_safe, edit_source_annotation_path(@source, annotation) %>
           </div>
         </div>
       <% end %>
