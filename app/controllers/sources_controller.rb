@@ -1,4 +1,6 @@
 class SourcesController < ApplicationController
+  before_filter :authenticate, except: [:index, :show]
+
   def index
     if params[:tag]
       @sources = Source.tagged_with(params[:tag]).order('rating DESC')
