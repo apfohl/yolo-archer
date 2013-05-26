@@ -15,22 +15,26 @@
       <%= link_to '<i class="icon-trash"></i>'.html_safe, source_path(@source), method: :delete, data: {confirm: 'Are you sure?' } %>
     </p>
     <h3>Annotations</h3>
-    <div class="row">
+    <div id="annotations">
       <% @source.annotations.order('rating DESC').each do |annotation| %>
-        <div class="span1 pagination-centered">
-          <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_up_path(@source, annotation) %>', this);"><i class="icon-plus"></i></button><br />
-          <span class="lead<%= annotation.rating >= 0 ? ' text-success' : ' text-error' %>"><%= annotation.rating %></span><br />
-          <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_down_path(@source, annotation) %>', this);"><i class="icon-minus"></i></button>
-        </div>
-        <div class="span7">
-          <div class="well">
-            <%= markdown annotation.content %>
-            <%= link_to '<i class="icon-trash pull-right"></i>'.html_safe, source_annotation_path(@source, annotation), method: :delete, data: {confirm: 'Are you sure?' } %>
-            <%= link_to '<i class="icon-pencil pull-right"></i>'.html_safe, edit_source_annotation_path(@source, annotation) %>
+        <div class="row" id="annotation_<%= annotation.id %>">
+          <div class="span1 pagination-centered">
+            <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_up_path(@source, annotation) %>', this);"><i class="icon-plus"></i></button><br />
+            <span class="lead<%= annotation.rating >= 0 ? ' text-success' : ' text-error' %>"><%= annotation.rating %></span><br />
+            <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_down_path(@source, annotation) %>', this);"><i class="icon-minus"></i></button>
+          </div>
+          <div class="span7">
+            <div class="well">
+              <%= link_to '<i class="icon-trash pull-right"></i>'.html_safe, source_annotation_path(@source, annotation), method: :delete, data: {confirm: 'Are you sure?' }, remote: true, id: "delete_annotation_#{annotation.id}" %>
+              <%= link_to '<i class="icon-pencil pull-right"></i>'.html_safe, edit_source_annotation_path(@source, annotation), remote: true, id: "update_annotation_#{annotation.id}" %>
+              <div id="annotation_content_<%= annotation.id %>">
+                <%= markdown annotation.content %>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>
     </div>
-    <%= link_to 'New Annotation', new_source_annotation_path(source_id: @source.id) %>
+    <%= link_to 'New Annotation', new_source_annotation_path(source_id: @source.id), remote: true, id: "new_annotation_link" %>
   </div>
 </div>

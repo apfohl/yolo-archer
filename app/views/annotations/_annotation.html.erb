@@ -1,0 +1,16 @@
+<div class="row" id="annotation_<%= @annotation.id %>">
+  <div class="span1 pagination-centered">
+    <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_up_path(@annotation.source, @annotation) %>', this)"><i class="icon-plus"></i></button><br />
+    <span class="lead<%= @annotation.rating >= 0 ? ' text-success' : ' text-error' %>"><%= @annotation.rating %></span><br />
+    <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_down_path(@annotation.source, @annotation) %>', this)"><i class="icon-minus"></i></button>
+  </div>
+  <div class="span7">
+    <div class="well">
+      <%= link_to '<i class="icon-trash pull-right"></i>'.html_safe, source_annotation_path(@annotation.source, @annotation), method: :delete, data: {confirm: 'Are you sure?' }, remote: true, id: "delete_annotation_#{@annotation.id}" %>
+      <%= link_to '<i class="icon-pencil pull-right"></i>'.html_safe, edit_source_annotation_path(@annotation.source, @annotation), remote: true, id: "update_annotation_#{@annotation.id}" %>
+      <div id="annotation_content_<%= @annotation.id %>">
+        <%= markdown @annotation.content %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+$('#annotation_content_<%= @annotation.id %>').hide()
+$('#update_annotation_<%= @annotation.id %>').hide()
+$('#delete_annotation_<%= @annotation.id %>').hide().after('<%= j render("form") %>');
