@@ -1,5 +1,4 @@
-<%= form_for [@source, @annotation] do |f| %>
-  <%= f.label :content %>
+<%= form_for [@source, @annotation], remote: true do |f| %>
   <%= f.text_area :content %><br />
   <%= f.submit %>
 <% end %>

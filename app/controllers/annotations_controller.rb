@@ -7,12 +7,10 @@ class AnnotationsController < ApplicationController
   def create
     @source = Source.find(params[:source_id])
     @annotation = @source.annotations.new(params[:annotation])
-    if @annotation.save
-      flash[:notice] = "Successfully created annotation."
-      redirect_to @source
-    else
-      flash[:alert] = "Failed."
-      render action: 'new'
+    @annotation.save!
+    respond_to do |format|
+      format.html { redirect_to @source }
+      format.js
     end
   end
 
@@ -24,19 +22,20 @@ class AnnotationsController < ApplicationController
   def update
     @source = Source.find(params[:source_id])
     @annotation = Annotation.find(params[:id])
-    if @annotation.update_attributes(params[:annotation])
-      flash[:notice] = "Successfully updated annotation."
-      redirect_to @source
-    else
-      render action: 'edit'
+    @annotation.update_attributes!(params[:annotation])
+    respond_to do |format|
+      format.html { redirect_to @source }
+      format.js
     end
   end
 
   def destroy
     @annotation = Annotation.find(params[:id])
     @annotation.destroy
-    flash[:notice] = "Successfully destroyed annotation."
-    redirect_to sources_url
+    respond_to do |format|
+      format.html { redirect_to sources_url }
+      format.js
+    end
   end
 
   def up
