@@ -1,4 +1,6 @@
 class AnnotationsController < ApplicationController
+  before_filter :authenticate
+
   def new
     @source = Source.find(params[:source_id])
     @annotation = Annotation.new
