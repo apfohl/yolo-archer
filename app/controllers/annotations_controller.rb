@@ -1,5 +1,5 @@
 class AnnotationsController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate, except: [:up, :down]
 
   def new
     @source = Source.find(params[:source_id])
@@ -42,13 +42,19 @@ class AnnotationsController < ApplicationController
 
   def up
     annotation = Annotation.find(params[:id])
-    annotation.increment! :rating
+    if session["has_voted_annotation_#{annotation.id}".to_sym] != true
+      annotation.increment! :rating
+      session["has_voted_annotation_#{annotation.id}".to_sym] = true
+    end
     render json: {rating: annotation.rating}
   end
 
   def down
     annotation = Annotation.find(params[:id])
-    annotation.decrement! :rating
+    if session["has_voted_annotation_#{annotation.id}".to_sym] != true
+      annotation.decrement! :rating
+      session["has_voted_annotation_#{annotation.id}".to_sym] = true
+    end
     render json: {rating: annotation.rating}
   end
 end

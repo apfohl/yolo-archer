@@ -1,5 +1,5 @@
 class SourcesController < ApplicationController
-  before_filter :authenticate, except: [:index, :show]
+  before_filter :authenticate, except: [:index, :show, :up, :down]
 
   def index
     if params[:tag]
@@ -50,13 +50,19 @@ class SourcesController < ApplicationController
 
   def up
     source = Source.find(params[:id])
-    source.increment! :rating
+    if session["has_voted_source_#{source.id}".to_sym] != true
+      source.increment! :rating
+      session["has_voted_source_#{source.id}".to_sym] = true
+    end
     render json: {rating: source.rating}
   end
 
   def down
     source = Source.find(params[:id])
-    source.decrement! :rating
+    if session["has_voted_source_#{source.id}".to_sym] != true
+      source.decrement! :rating
+      session["has_voted_source_#{source.id}".to_sym] = true
+    end
     render json: {rating: source.rating}
   end
 end
