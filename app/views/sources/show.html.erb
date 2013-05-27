@@ -7,10 +7,10 @@
   <div class="span8 offset2">
     <h1><%= @source.title %></h1>
     <p class="lead">
-      <strong>URL:</strong> <%= link_to @source.url, @source.url %><br />
-      <strong>Author:</strong> <%= @source.author %><br />
-      <strong>Publisher:</strong> <%= @source.publisher %><br />
-      <strong>Tags:</strong> <%= raw @source.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %><br />
+      <% if !@source.url.empty? %><strong>URL:</strong> <%= link_to @source.url, @source.url %><br /><% end %>
+      <% if !@source.author.empty? %><strong>Author:</strong> <%= @source.author %><br /><% end %>
+      <% if !@source.publisher.empty? %><strong>Publisher:</strong> <%= @source.publisher %><br /><% end %>
+      <% if !@source.tags.empty? %><strong>Tags:</strong> <%= raw @source.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %><br /><% end %>
       <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_source_path(@source) %>
       <%= link_to '<i class="icon-trash"></i>'.html_safe, source_path(@source), method: :delete, data: {confirm: 'Are you sure?' } %>
     </p>

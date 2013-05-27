@@ -11,31 +11,7 @@
   <div class="span8 offset2">
     <h1>Sources</h1>
     <% @sources.each do |source| %>
-      <div class="row">
-        <div class="span1 pagination-centered">
-          <button class="btn btn-mini" onclick="vote_source('<%= source_up_path(source) %>', this);"><i class="icon-plus"></i></button><br />
-          <span class="lead<%= source.rating >= 0 ? ' text-success' : ' text-error' %>"><%= source.rating %></span><br />
-          <button class="btn btn-mini" onclick="vote_source('<%= source_down_path(source) %>', this);"><i class="icon-minus"></i></button>
-        </div>
-        <div class="span7">
-          <h2><%= link_to source.title, source %></h2>
-          <p class="lead">
-            <strong>URL:</strong> <%= link_to source.url, source.url %><br />
-            <strong>Author:</strong> <%= source.author %><br />
-            <strong>Publisher:</strong> <%= source.publisher %><br />
-            <strong>Tags:</strong> <%= raw source.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
-          </p>
-        </div>
-      </div>
-      <% if !source.annotations.empty? %>
-        <div class="row">
-          <div class="offset1 span7">
-            <div class="well">
-              <%= markdown source.annotations.order('rating DESC').first.content %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render source %>
     <% end %>
     <%= link_to 'New Source', new_source_path %>
   </div>
