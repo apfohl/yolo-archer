@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>YoloArcher</title>
+    <title>OpenData Source Collection</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
@@ -10,12 +10,16 @@
   <body>
 	<a href="https://github.com/apfohl/yolo-archer"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
     <div class="container">
-      <% flash.each do |name, msg| %>
-        <div class="alert alert-<%= name == :notice ? "success" : "error" %> fade in">
-          <a class="close" data-dismiss="alert" href="#">x</a>
-          <%= msg %>
+      <div class="row">
+        <div class="offset2 span8">
+          <% flash.each do |name, msg| %>
+            <div class="alert alert-<%= name == :notice ? "success" : "error" %> fade in">
+              <a class="close" data-dismiss="alert" href="#">x</a>
+              <%= msg %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
       <%= yield %>
     </div>
   </body>
