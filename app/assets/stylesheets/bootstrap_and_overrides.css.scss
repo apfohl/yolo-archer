@@ -5,8 +5,12 @@ $iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
 @import "bootstrap";
 
 body {
-	padding-top: 40px;
-	padding-bottom: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+textarea {
+  width: 95%;
 }
 
 @import "bootstrap-responsive";

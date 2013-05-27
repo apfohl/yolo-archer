@@ -14,33 +14,3 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-
-function vote_annotation(link, caller) {
-  console.log(link);
-  $.ajax({
-    url: link,
-    type: 'PUT',
-    success: function(res) {
-      console.log(res);
-      console.log($(caller).parent().children(".lead").text());
-      $(caller).parent().children(".lead").text(res.rating);
-      $(caller).parent().children(".lead").removeClass("text-success text-error")
-      $(caller).parent().children(".lead").addClass(res.rating >= 0 ? "text-success" : "text-error");
-    },
-  });
-};
-
-function vote_source(link, caller) {
-  console.log(link);
-  $.ajax({
-    url: link,
-    type: 'PUT',
-    success: function(res) {
-      console.log(res);
-      console.log($(caller).parent().children(".lead").text());
-      $(caller).parent().children(".lead").text(res.rating);
-      $(caller).parent().children(".lead").removeClass("text-success text-error")
-      $(caller).parent().children(".lead").addClass(res.rating >= 0 ? "text-success" : "text-error");
-    },
-  });
-};

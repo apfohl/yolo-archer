@@ -1,8 +1,8 @@
 <div class="row">
   <div class="span1 pagination-centered">
-    <button class="btn btn-mini" onclick="vote_source('<%= source_up_path(source) %>', this);"><i class="icon-plus"></i></button><br />
-    <span class="lead<%= source.rating >= 0 ? ' text-success' : ' text-error' %>"><%= source.rating %></span><br />
-    <button class="btn btn-mini" onclick="vote_source('<%= source_down_path(source) %>', this);"><i class="icon-minus"></i></button>
+    <%= link_to '<i class="icon-plus"></i>'.html_safe, source_up_path(source), remote: true, method: :put, class: "btn btn-mini" %><br />
+    <span id="rating_source_<%= source.id %>" class="lead<%= source.rating >= 0 ? ' text-success' : ' text-error' %>"><%= source.rating %></span><br />
+    <%= link_to '<i class="icon-minus"></i>'.html_safe, source_down_path(source), remote: true, method: :put, class: "btn btn-mini" %><br />
   </div>
   <div class="span7">
     <h2><%= link_to source.title, source %></h2>

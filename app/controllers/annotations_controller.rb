@@ -41,20 +41,24 @@ class AnnotationsController < ApplicationController
   end
 
   def up
-    annotation = Annotation.find(params[:id])
-    if session["has_voted_annotation_#{annotation.id}".to_sym] != true
-      annotation.increment! :rating
-      session["has_voted_annotation_#{annotation.id}".to_sym] = true
+    @annotation = Annotation.find(params[:id])
+    if session["has_voted_annotation_#{@annotation.id}".to_sym] != true
+      @annotation.increment! :rating
+      session["has_voted_annotation_#{@annotation.id}".to_sym] = true
     end
-    render json: {rating: annotation.rating}
+    respond_to do |format|
+      format.js
+    end
   end
 
   def down
-    annotation = Annotation.find(params[:id])
-    if session["has_voted_annotation_#{annotation.id}".to_sym] != true
-      annotation.decrement! :rating
-      session["has_voted_annotation_#{annotation.id}".to_sym] = true
+    @annotation = Annotation.find(params[:id])
+    if session["has_voted_annotation_#{@annotation.id}".to_sym] != true
+      @annotation.decrement! :rating
+      session["has_voted_annotation_#{@annotation.id}".to_sym] = true
     end
-    render json: {rating: annotation.rating}
+    respond_to do |format|
+      format.js
+    end
   end
 end

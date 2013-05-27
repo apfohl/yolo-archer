@@ -1,13 +1,8 @@
-<%= form_for @source do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %><br />
-  <%= f.label :url %>
-  <%= f.text_field :url %><br />
-  <%= f.label :author %>
-  <%= f.text_field :author %><br />
-  <%= f.label :publisher %>
-  <%= f.text_field :publisher %><br />
-  <%= f.label :tag_list, "Tags (seperated by commas)" %>
-  <%= f.text_field :tag_list %><br />
-  <%= f.submit %>
+<%= simple_form_for @source, html: { class: 'form-horizontal' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :url %>
+  <%= f.input :author %>
+  <%= f.input :publisher %>
+  <%= f.input :tag_list, label: "Tags (comma seperated)" %>
+  <%= f.button :submit %>
 <% end %>

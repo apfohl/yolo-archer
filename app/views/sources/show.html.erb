@@ -1,7 +1,9 @@
 <div class="row">
-  <%= link_to root_path do %>
-    <i class="icon-home"></i> back to sources
-  <% end %>
+  <div class="offset2 span8">
+    <%= link_to root_path do %>
+      <i class="icon-home"></i> back to sources
+    <% end %>
+  </div>
 </div>
 <div class="row">
   <div class="span8 offset2">
@@ -17,22 +19,7 @@
     <h3>Annotations</h3>
     <div id="annotations">
       <% @source.annotations.order('rating DESC').each do |annotation| %>
-        <div class="row" id="annotation_<%= annotation.id %>">
-          <div class="span1 pagination-centered">
-            <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_up_path(@source, annotation) %>', this);"><i class="icon-plus"></i></button><br />
-            <span class="lead<%= annotation.rating >= 0 ? ' text-success' : ' text-error' %>"><%= annotation.rating %></span><br />
-            <button class="btn btn-mini" onclick="vote_annotation('<%= source_annotation_down_path(@source, annotation) %>', this);"><i class="icon-minus"></i></button>
-          </div>
-          <div class="span7">
-            <div class="well">
-              <%= link_to '<i class="icon-trash pull-right"></i>'.html_safe, source_annotation_path(@source, annotation), method: :delete, data: {confirm: 'Are you sure?' }, remote: true, id: "delete_annotation_#{annotation.id}" %>
-              <%= link_to '<i class="icon-pencil pull-right"></i>'.html_safe, edit_source_annotation_path(@source, annotation), remote: true, id: "update_annotation_#{annotation.id}" %>
-              <div id="annotation_content_<%= annotation.id %>">
-                <%= markdown annotation.content %>
-              </div>
-            </div>
-          </div>
-        </div>
+        <%= render annotation %>
       <% end %>
     </div>
     <%= link_to 'New Annotation', new_source_annotation_path(source_id: @source.id), remote: true, id: "new_annotation_link" %>
