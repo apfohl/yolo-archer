@@ -3,7 +3,7 @@ class SourcesController < ApplicationController
 
   def index
     if params[:query]
-      @sources = Source.text_search(params[:query]).order('rating DESC')
+      @sources = Source.text_search(params[:query]).sort { |a, b| b.rating <=> a.rating }
     elsif params[:tag]
       @sources = Source.tagged_with(params[:tag]).order('rating DESC')
     else
@@ -52,10 +52,10 @@ class SourcesController < ApplicationController
 
   def up
     @source = Source.find(params[:id])
-    if session["has_voted_source_#{@source.id}".to_sym] != true
+    #if session["has_voted_source_#{@source.id}".to_sym] != true
       @source.increment! :rating
       session["has_voted_source_#{@source.id}".to_sym] = true
-    end
+    #end
     respond_to do |format|
       format.js
     end
@@ -63,10 +63,10 @@ class SourcesController < ApplicationController
 
   def down
     @source = Source.find(params[:id])
-    if session["has_voted_source_#{@source.id}".to_sym] != true
+    #if session["has_voted_source_#{@source.id}".to_sym] != true
       @source.decrement! :rating
       session["has_voted_source_#{@source.id}".to_sym] = true
-    end
+    #end
     respond_to do |format|
       format.js
     end
