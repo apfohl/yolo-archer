@@ -9,7 +9,8 @@ class Source < ActiveRecord::Base
   
   include PgSearch
   pg_search_scope :search, against: [:author, :publisher, :title],
-    associated_against: {annotations: :content}
+    associated_against: {annotations: :content},
+    order_within_rank: "rating DESC"
 
   def self.text_search(query)
     if query.present?
