@@ -6,6 +6,18 @@ class Source < ActiveRecord::Base
   has_many :tags, through: :taggings
 
   validates_presence_of :title
+  
+  include PgSearch
+  pg_search_scope :search, against: [:author, :publisher, :title],
+    associated_against: {annotations: :content}
+
+  def self.text_search(query)
+    if query.present?
+      search(query)
+    else
+      scoped
+    end
+  end
 
   def self.tagged_with(name)
     Tag.find_by_name!(name).sources
