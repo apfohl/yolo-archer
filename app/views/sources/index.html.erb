@@ -10,7 +10,9 @@
 <div class="row">
   <div class="offset2 span8">
     <h1>Sources</h1>
-    <%= link_to 'New Source', new_source_path %>
+    <p>
+      <%= link_to 'New Source', new_source_path %>
+    </p>
     <% @sources.each do |source| %>
       <%= render source %>
     <% end %>
