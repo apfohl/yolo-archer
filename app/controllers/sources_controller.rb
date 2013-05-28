@@ -2,10 +2,12 @@ class SourcesController < ApplicationController
   before_filter :authenticate, except: [:index, :show, :up, :down]
 
   def index
-    if params[:tag]
-      @sources = Source.text_search(params[:query]).tagged_with(params[:tag]).order('rating DESC')
-    else
+    if params[:query]
       @sources = Source.text_search(params[:query]).order('rating DESC')
+    elsif params[:tag]
+      @sources = Source.tagged_with(params[:tag]).order('rating DESC')
+    else
+      @sources = Source.order('rating DESC')
     end
   end
 
