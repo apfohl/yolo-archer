@@ -52,10 +52,10 @@ class SourcesController < ApplicationController
 
   def up
     @source = Source.find(params[:id])
-    #if session["has_voted_source_#{@source.id}".to_sym] != true
+    if session["has_voted_source_#{@source.id}".to_sym] != true
       @source.increment! :rating
       session["has_voted_source_#{@source.id}".to_sym] = true
-    #end
+    end
     respond_to do |format|
       format.js
     end
@@ -63,10 +63,10 @@ class SourcesController < ApplicationController
 
   def down
     @source = Source.find(params[:id])
-    #if session["has_voted_source_#{@source.id}".to_sym] != true
+    if session["has_voted_source_#{@source.id}".to_sym] != true
       @source.decrement! :rating
       session["has_voted_source_#{@source.id}".to_sym] = true
-    #end
+    end
     respond_to do |format|
       format.js
     end

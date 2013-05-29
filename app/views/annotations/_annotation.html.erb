@@ -5,12 +5,12 @@
     <%= link_to '<i class="icon-minus"></i>'.html_safe, source_annotation_down_path(annotation.source, annotation), remote: true, method: :put, class: "btn btn-mini" %>
   </div>
   <div class="span7">
-    <div class="well">
+    <table class="table"><tr><td>
       <%= link_to '<i class="icon-trash pull-right"></i>'.html_safe, source_annotation_path(annotation.source, annotation), method: :delete, data: {confirm: 'Are you sure?' }, remote: true, id: "delete_annotation_#{annotation.id}" %>
       <%= link_to '<i class="icon-pencil pull-right"></i>'.html_safe, edit_source_annotation_path(annotation.source, annotation), remote: true, id: "update_annotation_#{annotation.id}" %>
       <div id="annotation_content_<%= annotation.id %>">
         <%= markdown annotation.content %>
       </div>
-    </div>
+    </td></tr></table>
   </div>
 </div>

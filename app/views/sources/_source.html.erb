@@ -17,9 +17,9 @@
 <% if !source.annotations.empty? %>
   <div class="row">
     <div class="offset1 span7">
-      <div class="well">
+      <table class="table"><tr><td>
         <%= markdown source.annotations.order('rating DESC').first.content %>
-      </div>
+      </td></tr></table>
     </div>
   </div>
 <% end %>
