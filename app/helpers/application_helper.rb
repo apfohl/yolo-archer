@@ -7,8 +7,10 @@ module ApplicationHelper
       end
     end
     tags.each do |tag|
-      index = tag.count.to_f / max * (classes.size - 1)
-      yield(tag, classes[index.round])
+      if tag.count.to_f > 1
+        index = tag.count.to_f / max * (classes.size - 1)
+        yield(tag, classes[index.round])
+      end
     end
   end
 
