@@ -8,8 +8,14 @@ class Source < ActiveRecord::Base
   validates_presence_of :title
   
   include PgSearch
-  pg_search_scope :search, against: [:author, :publisher, :title],
-    associated_against: {annotations: :content}
+  pg_search_scope :search,
+    against: [
+      [:author, 'B'],
+      [:publisher, 'C'],
+      [:title, 'A']
+    ],
+    associated_against: { annotations: :content },
+    using: { tsearch: { prefix: true } }
 
   def self.text_search(query)
     if query.present?

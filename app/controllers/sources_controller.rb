@@ -3,11 +3,11 @@ class SourcesController < ApplicationController
 
   def index
     if params[:query]
-      @sources = Source.text_search(params[:query]).sort { |a, b| b.rating <=> a.rating }
+      @sources = Source.text_search(params[:query])
     elsif params[:tag]
-      @sources = Source.tagged_with(params[:tag]).order('rating DESC').page(params[:page]).per_page(params[:view].nil? ? 5 : 20)
+      @sources = Source.tagged_with(params[:tag]).order('rating DESC').page(params[:page]).per_page(params[:view].nil? ? 10 : 20)
     else
-      @sources = Source.order('rating DESC').page(params[:page]).per_page(params[:view].nil? ? 5 : 20)
+      @sources = Source.order('rating DESC').page(params[:page]).per_page(params[:view].nil? ? 10 : 20)
     end
   end
 
