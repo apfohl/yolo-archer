@@ -5,9 +5,9 @@ class SourcesController < ApplicationController
     if params[:query]
       @sources = Source.text_search(params[:query]).sort { |a, b| b.rating <=> a.rating }
     elsif params[:tag]
-      @sources = Source.tagged_with(params[:tag]).order('rating DESC')
+      @sources = Source.tagged_with(params[:tag]).order('rating DESC').page(params[:page]).per_page(5)
     else
-      @sources = Source.order('rating DESC')
+      @sources = Source.order('rating DESC').page(params[:page]).per_page(5)
     end
   end
 

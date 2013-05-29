@@ -13,12 +13,17 @@
     <% end %>
   </div>
 </div>
+<hr />
 <div class="row">
   <div class="offset2 span8">
-    <h1>Sources</h1>
     <p>
       <%= link_to 'New Source', new_source_path %>
     </p>
+    <% if !params[:query] %>
+      <div class="pagination-centered">
+        <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+      </div>
+    <% end %>
     <% @sources.each do |source| %>
       <%= render source %>
     <% end %>
