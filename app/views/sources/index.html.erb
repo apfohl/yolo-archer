@@ -17,9 +17,9 @@
 <div class="row">
   <div class="offset2 span8">
     <div class="btn-group pull-right">
-      <%= link_to '<i class="icon-th"></i>'.html_safe, params.merge(:view => nil, :page => nil), class: "btn btn-mini #{params[:view].nil? ? 'active' : ''}" %>
-      <%= link_to '<i class="icon-th-list"></i>'.html_safe, params.merge(:view => "list", :page => nil), class: "btn btn-mini #{params[:view] == 'list' ? 'active' : ''}" %>
-      <%= link_to '<i class="icon-plus-sign"></i>'.html_safe, new_source_path, class: "btn btn-mini" %>
+      <%= link_to '<i class="icon-th"></i>'.html_safe, params.merge(:view => nil, :page => nil), class: "btn btn-mini #{params[:view].nil? ? 'active' : ''}", title: "Item View" %>
+      <%= link_to '<i class="icon-th-list"></i>'.html_safe, params.merge(:view => "list", :page => nil), class: "btn btn-mini #{params[:view] == 'list' ? 'active' : ''}", title: "List View" %>
+      <%= link_to '<i class="icon-plus-sign"></i>'.html_safe, new_source_path, class: "btn btn-mini", title: "New Source" %>
     </div>
     <% if params[:view].nil? %>
       <% @sources.each do |source| %>
