@@ -1,3 +1,0 @@
-$('#rating_annotation_<%= @annotation.id %>').text('<%= @annotation.rating %>')
-$('#rating_annotation_<%= @annotation.id %>').removeClass("text-success text-error")
-$('#rating_annotation_<%= @annotation.id %>').addClass('<%= @annotation.rating >= 0 ? "text-success" : "text-error" %>');

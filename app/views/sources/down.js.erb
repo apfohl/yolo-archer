@@ -1,3 +1,0 @@
-$('#rating_source_<%= @source.id %>').text('<%= @source.rating %>')
-$('#rating_source_<%= @source.id %>').removeClass("text-success text-error")
-$('#rating_source_<%= @source.id %>').addClass('<%= @source.rating >= 0 ? "text-success" : "text-error" %>');
